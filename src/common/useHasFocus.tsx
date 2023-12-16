@@ -4,7 +4,12 @@ import { useState, useEffect } from "react";
 
 export const useHasFocus = () => {
   // get the initial state
-  const [focus, setFocus] = useState(document.hasFocus?.() || false);
+  const [focus, setFocus] = useState(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+    return window.document.hasFocus?.() || false;
+  });
 
   useEffect(() => {
     const onFocus = () => setFocus(true);
