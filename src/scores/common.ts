@@ -15,3 +15,8 @@ export interface Score {
   points: number;
   metalCounts: { [key in CupMetal]: number };
 }
+
+export interface TimestampedScores {
+  scores: Score[];
+  fetchedAt: number;
+}

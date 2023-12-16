@@ -2,7 +2,7 @@ import 'server-only';
 import orderBy from "lodash.orderby";
 import {GoogleSpreadsheet, GoogleSpreadsheetCell} from "google-spreadsheet";
 import {JWT} from "google-auth-library";
-import {BRONZE, CupMetal, GOLD, Score, SILVER, WHITE} from "@/scores/common";
+import {BRONZE, CupMetal, GOLD, Score, SILVER, TimestampedScores, WHITE} from "@/scores/common";
 
 function getSheet(): GoogleSpreadsheet {
   if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL) {
@@ -68,7 +68,7 @@ function determineCupMetalCounts(cupCells: GoogleSpreadsheetCell[]): { [key in C
   });
 }
 
-export async function loadScores(): Promise<Score[]> {
+export async function loadScores(): Promise<TimestampedScores> {
   const spreadsheet = getSheet();
   await spreadsheet.loadInfo();
   const latestScoresSheet = spreadsheet.sheetsByTitle['Latest Scores'];
@@ -89,5 +89,10 @@ export async function loadScores(): Promise<Score[]> {
       metalCounts,
     } as Score);
   });
-  return orderBy(scores, ['points', 'metalCounts.Gold', 'metalCounts.Silver', 'metalCounts.Bronze'], ['desc', 'desc', 'desc', 'desc']);
+  const orderedScores = orderBy(scores, ['points', 'metalCounts.Gold', 'metalCounts.Silver', 'metalCounts.Bronze'], ['desc', 'desc', 'desc', 'desc']);
+
+  return {
+    scores: orderedScores,
+    fetchedAt: Date.now(),
+  };
 }
