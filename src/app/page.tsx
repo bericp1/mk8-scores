@@ -117,7 +117,7 @@ export default async function Home() {
     <main className="container mx-auto p-4 text-center">
       <table className="table-auto">
         <thead>
-          <tr>
+          <tr className="border-b-red-600 border-b-2 border-solid">
             <th className="px-8 py-8 font-bold text-4xl uppercase">Racer</th>
             <th className="px-8 py-8 font-bold text-4xl uppercase text-gold">Gold</th>
             <th className="px-8 py-8 font-bold text-4xl uppercase text-silver">Silver</th>
