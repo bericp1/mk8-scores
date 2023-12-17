@@ -17,6 +17,5 @@ export function useTimestampedScores({
       })
       .then((res) => res.json()),
     fallbackData: initialTimestampedScores,
-    revalidateOnMount: false,
   });
 }
