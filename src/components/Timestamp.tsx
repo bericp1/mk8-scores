@@ -13,5 +13,5 @@ export function Timestamp({
     return ssrValue;
   }
   const date = typeof rawValue === 'number' ? new Date(rawValue) : rawValue;
-  return date.toLocaleDateString();
+  return date.toLocaleString();
 }
