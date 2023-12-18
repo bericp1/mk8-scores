@@ -1,6 +1,7 @@
 'use client';
 
 import {CupMetal, TimestampedScores} from "@/scores/common";
+import {Timestamp} from "@/components/Timestamp";
 
 function formatMetalCount(count: number): string {
   if (count === 0) {
@@ -49,7 +50,9 @@ export function ScoresTable({
       <tfoot>
       <tr className="border-b-red-600 border-b-2 border-solid">
         <td className="px-2 py-2 text-md uppercase" colSpan={5}>
-          {`Loaded at ${new Date(fetchedAt).toLocaleTimeString()} (local)`}
+          {'Loaded at '}
+          <Timestamp value={fetchedAt} ssrValue="..." />
+          {' (local)'}
           {isValidating && ' • (refreshing...)'}
           {(!isValidating && !!refresh) && <>{' • '} <button className="border border-solid border-black px-4" type="button" onClick={() => { refresh(); }}>Reload</button></>}
         </td>
