@@ -1,9 +1,7 @@
-import {loadScores} from "@/scores/fetch";
 import {ScoresPage} from "@/components/ScoresPage";
 
-export default async function Home() {
-  const initialTimestampedScores = await loadScores();
+export default function Home() {
   return (
-    <ScoresPage initialTimestampedScores={initialTimestampedScores} />
+    <ScoresPage />
   )
 }

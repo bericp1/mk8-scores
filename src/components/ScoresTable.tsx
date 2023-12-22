@@ -33,6 +33,7 @@ export function ScoresTable({
         <th className="px-8 py-8 font-bold text-4xl uppercase text-gold">Gold</th>
         <th className="px-8 py-8 font-bold text-4xl uppercase text-silver">Silver</th>
         <th className="px-8 py-8 font-bold text-4xl uppercase text-bronze">Bronze</th>
+        <th className="px-8 py-8 font-bold text-4xl uppercase">Cup Pts</th>
         <th className="px-8 py-8 font-bold text-4xl uppercase">Pts</th>
       </tr>
       </thead>
@@ -43,18 +44,20 @@ export function ScoresTable({
           <td className="px-4 py-8 text-4xl uppercase text-gold">{formatMetalCount(score.metalCounts[CupMetal.Gold])}</td>
           <td className="px-4 py-8 text-4xl uppercase text-silver">{formatMetalCount(score.metalCounts[CupMetal.Silver])}</td>
           <td className="px-4 py-8 text-4xl uppercase text-bronze">{formatMetalCount(score.metalCounts[CupMetal.Bronze])}</td>
+          <td className="px-4 py-8 text-4xl uppercase">{score.metalPoints}</td>
           <td className="px-4 py-8 text-4xl uppercase">{score.points}</td>
         </tr>
       ))}
       </tbody>
       <tfoot>
       <tr className="border-b-red-600 border-b-2 border-solid">
-        <td className="px-2 py-2 text-md uppercase" colSpan={5}>
-          {'Loaded at '}
-          <Timestamp value={fetchedAt} ssrValue="..." />
-          {' (local)'}
-          {isValidating && ' • (refreshing...)'}
-          {(!isValidating && !!refresh) && <>{' • '} <button className="border border-solid border-black px-4" type="button" onClick={() => { refresh(); }}>Reload</button></>}
+        <td className="px-2 py-2 text-md uppercase" colSpan={6}>
+          <span className="leading-8">
+            {'Loaded at '}
+            <Timestamp value={fetchedAt} ssrValue="..." />
+            {' (local)'}
+          </span>
+          {!!refresh && <>{' • '} <button className="uppercase text-sm leading-6 border border-solid border-black w-[100px]" type="button" onClick={() => { refresh(); }}>{isValidating ? 'Loading...' : 'Reload'}</button></>}
         </td>
       </tr>
       </tfoot>

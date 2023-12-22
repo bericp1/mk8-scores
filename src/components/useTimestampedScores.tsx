@@ -5,7 +5,7 @@ export function useTimestampedScores({
   initialTimestampedScores,
 }: {
   initialTimestampedScores?: TimestampedScores;
-}) {
+} = {}) {
   return useSWR<TimestampedScores>('/api/scores', {
     refreshInterval: 60000,
     fetcher: () => fetch('/api/scores')

@@ -1,3 +1,3 @@
 export function Loading() {
-  return (<h1 className="text-4xl">Loading...</h1>);
+  return (<h1 className="block mx-auto my-8 text-4xl text-center uppercase">Loading...</h1>);
 }
