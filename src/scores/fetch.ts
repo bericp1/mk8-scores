@@ -90,7 +90,7 @@ export async function loadScores(): Promise<TimestampedScores> {
       metalPoints: Object.entries(POINTS_BY_METAL).reduce((acc, [key, points]) => acc + points * metalCounts[key as CupMetal], 0)
     });
   });
-  const orderedScores = orderBy(scores, ['points', 'metalCounts.Gold', 'metalCounts.Silver', 'metalCounts.Bronze'], ['desc', 'desc', 'desc', 'desc']);
+  const orderedScores = orderBy(scores, ['metalPoints', 'points', 'metalCounts.Gold', 'metalCounts.Silver', 'metalCounts.Bronze'], ['desc', 'desc', 'desc', 'desc', 'desc']);
 
   return {
     scores: orderedScores,
